@@ -1,17 +1,24 @@
 import * as Hapi from "hapi";
-import * as Joi from "joi";
+import Joi = require("joi");
 
 const server = new Hapi.Server({
     port: 3000,
-    host: "localhost"
-});
-
-const requestPayloadSchema = Joi.object().keys({
-    firstName: Joi.ref("name.firstName"),
-    name: {
-        firstName: Joi.string().required(),
+    host: "localhost",
+    routes: {
+        validate: {
+            async failAction(request: Hapi.Request, h: Hapi.ResponseToolkit, error?: Error) {
+                throw error;
+            }
+        }
     }
 });
+
+const requestPayloadSchema = {
+    firstName: Joi.ref("name.firstName"),
+    name: Joi.object({
+        firstName: Joi.string(),
+    })
+};
 
 interface INamePayload {
     firstName?: string;
@@ -20,7 +27,7 @@ interface INamePayload {
     }
 }
 
-const responseSchema = Joi.string().required();
+const responseSchema = { response: Joi.string().required() };
 
 const routes: Hapi.ServerRoute[] = [
     {
@@ -30,11 +37,11 @@ const routes: Hapi.ServerRoute[] = [
             const payload = req.payload as INamePayload;
             
             if (payload.firstName) {
-                return `Hello, ${payload.firstName}!`
+                return { response: `Hello, ${payload.firstName}!` };
             } else if (payload.name) {
-                return `Hello, ${payload.name.firstName}`
+                return { response: `Hello, ${payload.name.firstName}` };
             } else {
-                return `Hello! I didn't catch your name, can you repeat that?`
+                return { response: `Hello! I didn't catch your name, can you repeat that?` };
             }
         },
         options: {
