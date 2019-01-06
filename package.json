@@ -1,0 +1,30 @@
+{
+  "name": "definitelytyped-issue-31826",
+  "version": "1.0.0",
+  "description": "Testing out interface changes based on Issue 31826",
+  "main": "index.ts",
+  "dependencies": {
+    "hapi": "^17.8.1",
+    "joi": "^14.3.1"
+  },
+  "devDependencies": {
+    "@types/hapi": "^17.8.2",
+    "@types/joi": "^14.0.1",
+    "@types/node": "^10.12.18",
+    "ts-node": "^7.0.1",
+    "typescript": "^3.2.2"
+  },
+  "scripts": {
+    "test": "ts-node index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ryuuji3/DefinetlyTyped-Issue-31826.git"
+  },
+  "author": "ryuuji3",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ryuuji3/DefinetlyTyped-Issue-31826/issues"
+  },
+  "homepage": "https://github.com/ryuuji3/DefinetlyTyped-Issue-31826#readme"
+}
